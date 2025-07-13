@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avaliação de Serviço</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-color: #1B1D6B;
+      --accent-color: #8DC63F;
+      --input-bg: #f0f0f5;
+      --border-color: #cbd1e0;
+      --primary-button: #1B1D6B;
+      --danger-button: #c0392b;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    main {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #d4d9e5;
+      padding-bottom: 10px;
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    h2, h3 {
+      color: var(--primary-button);
+      margin: 0;
+    }
+
+    form, .feedbacks {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 40px;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #888;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 12px;
+      display: block;
+    }
+
+    button {
+      background-color: var(--accent-color);
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #76b82f;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    .card .nota-badge {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      float: right;
+    }
+
+    .card button {
+      background-color: var(--danger-button);
+      margin-top: 10px;
+    }
+
+    .card button:hover {
+      background-color: #a62a1d;
+    }
+
+    .checkbox-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #e8ecf4;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-label {
+      flex: 1;
+      color: var(--text-color);
+    }
+
+    .checkbox-options {
+      display: flex;
+      gap: 15px;
+    }
+
+    .checkbox-options label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: normal;
+      color: #333;
+    }
+
+    .checkbox-options input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    #formFiltro button {
+      width: auto;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    form, .feedbacks {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .feedbacks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 10px;
+      }
+
+      form, .feedbacks {
+        padding: 15px;
+      }
+
+      input, select, textarea, button {
+        font-size: 0.9rem;
+      }
+
+      .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .checkbox-options {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+    }
+
+    :root {
+      --bg-color: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-color: #1B1D6B;
+      --accent-color: #8DC63F;
+      --input-bg: #f0f0f5;
+      --border-color: #cbd1e0;
+      --primary-button: #1B1D6B;
+      --danger-button: #c0392b;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    main {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #d4d9e5;
+      padding-bottom: 10px;
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    h2, h3 {
+      color: var(--primary-button);
+      margin: 0;
+    }
+
+    form, .feedbacks {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 40px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(141, 198, 63, 0.3);
+    }
+
+    button {
+      background-color: var(--accent-color);
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      background: rgba(255, 255, 255, 0.5);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInCard 0.4s ease forwards;
+    }
+
+    @keyframes fadeInCard {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .checkbox-group {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: aparecerParametros 0.3s ease forwards;
+    }
+
+    @keyframes aparecerParametros {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    #alertSucesso {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #8DC63F;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <img src="jbs-logo.png" alt="Logo JBS Couros">
+      <h2>Avaliação de Serviço</h2>
+    </header>
+
+    <form id="formAvaliacao">
+      <label>Avaliador</label>
+      <input type="text" name="cliente" required placeholder="Digite o nome do avaliador">
+
+      <label>Ordem de Serviço</label>
+      <input type="text" name="ordemServico" required placeholder="Número da OS">
+
+      <label>Tipo de Serviço</label>
+      <select name="tipoServico" id="tipoServico" required>
+        <option value="">Selecione</option>
+        <option value="Elétrico">Elétrico</option>
+        <option value="Mecânico">Mecânico</option>
+        <option value="Civil">Civil</option>
+      </select>
+
+      <label>Descrição do Serviço</label>
+      <textarea name="descricao" required placeholder="Descreva o serviço realizado"></textarea>
+
+      <label>Nota (0 a 10)</label>
+      <input type="number" name="nota" min="0" max="10" required>
+
+      <label>Observações</label>
+      <textarea name="observacoes" placeholder="Observações adicionais (opcional)"></textarea>
+
+      <div id="parametrosContainer"></div>
+
+      <label>Anexar Imagem (opcional)</label>
+      <input type="file" name="imagem" accept="image/*" id="imagem">
+
+      <button type="submit">Salvar Avaliação</button>
+    </form>
+
+    <h2>Feedbacks Recebidos</h2>
+    <h3>Filtros de busca</h3>
+    <form id="formFiltro">
+      <input type="text" name="ordemServico" placeholder="Ordem de Serviço">
+      <select name="tipoServico">
+        <option value="">Tipo de Serviço</option>
+        <option value="Elétrico">Elétrico</option>
+        <option value="Mecânico">Mecânico</option>
+        <option value="Civil">Civil</option>
+      </select>
+      <input type="number" name="notaMin" min="0" max="10" placeholder="Nota mínima">
+      <input type="text" name="busca" placeholder="Busca na descrição/observações">
+      <button type="submit">Filtrar</button>
+      <button type="button" id="btnLimpar">Limpar filtros</button>
+    </form>
+
+    <div class="feedbacks" id="listaFeedbacks"></div>
+
+    <div style="text-align: right; margin-bottom: 40px;">
+      <button id="btnExportarPDF" style="width: auto;">📄 Exportar Feedbacks em PDF</button>
+    </div>
+
+    <div id="alertSucesso">Avaliação salva com sucesso!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+
+function mostrarAlertaSucesso() {
+      const alerta = document.getElementById('alertSucesso');
+      alerta.style.opacity = '1';
+      setTimeout(() => alerta.style.opacity = '0', 3000);
+    }
+
+document.getElementById('btnExportarPDF').addEventListener('click', async () => {
+  const { jsPDF } = window.jspdf;
+  const feedbacksContainer = document.getElementById('listaFeedbacks');
+  const feedbacks = feedbacksContainer.querySelectorAll('.card');
+
+  if (feedbacks.length === 0) {
+    alert('Nenhum feedback para exportar.');
+    return;
+  }
+
+  // Carrega a imagem e converte para Base64
+  const toDataURL = (url) =>
+    fetch(url)
+      .then((response) => response.blob())
+      .then(
+        (blob) =>
+          new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
+          })
+      );
+
+  const logoBase64 = await toDataURL('jbs-logo.png');
+
+  const doc = new jsPDF();
+  doc.setFont('Helvetica', 'normal');
+  doc.setFontSize(11);
+
+  const margin = 20;
+  const cardPadding = 10;
+  const cardSpacing = 15;
+  const lineHeight = 14;
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const logoWidth = 20;
+  const logoHeight = 10;
+
+  let y = margin;
+
+  feedbacks.forEach((feedback, index) => {
+  const cardClone = feedback.cloneNode(true);
+  const button = cardClone.querySelector('button');
+  if (button) button.remove();
+
+  const imagem = feedback.dataset?.imagem;
+
+  let rawText = cardClone.innerText.trim().replace(/\s+\n/g, '\n');
+  rawText = rawText
+    .split('\n')
+    .map(line => line.trimStart())
+    .join('\n');
+
+  const lines = doc.splitTextToSize(rawText, pageWidth - margin * 2 - cardPadding * 2);
+  const lineHeight = 14;
+  const textHeight = lines.length * lineHeight;
+
+  const imgHeight = imagem ? 40 : 0;
+  const imgWidth = imagem ? 50 : 0;
+  const extraImageSpacing = imagem ? 10 : 0;
+
+  const cardHeight = textHeight + cardPadding * 2 + imgHeight + extraImageSpacing;
+
+  if (y + cardHeight > pageHeight - margin) {
+    doc.addPage();
+    y = margin;
+  }
+
+  const cardX = margin;
+  const cardY = y;
+  const cardWidth = pageWidth - margin * 2;
+
+  doc.setFillColor(255, 255, 255);
+  doc.setDrawColor(180);
+  doc.roundedRect(cardX, cardY, cardWidth, cardHeight, 5, 5, 'FD');
+
+  doc.setTextColor(27, 29, 107);
+  let lineY = cardY + cardPadding;
+
+  lines.forEach(line => {
+    const [label, ...rest] = line.split(':');
+    const value = rest.join(':').trim();
+
+    if (value) {
+      doc.setFont('Helvetica', 'bold');
+      doc.text(`${label.trim()}:`, cardX + cardPadding, lineY);
+      doc.setFont('Helvetica', 'normal');
+      doc.text(`${value}`, cardX + cardPadding + 40, lineY);
+    } else {
+      doc.setFont('Helvetica', 'normal');
+      doc.text(line, cardX + cardPadding, lineY);
+    }
+
+    lineY += lineHeight;
+  });
+
+  // ✅ Imagem abaixo do conteúdo textual
+  if (imagem) {
+    const imgY = lineY + extraImageSpacing;
+    doc.addImage(imagem, 'JPEG', cardX + cardPadding, imgY, imgWidth, imgHeight);
+  }
+
+  // ✅ Logo no canto inferior
+  const logoX = cardX + cardWidth - logoWidth - cardPadding;
+  const logoY = cardY + cardHeight - logoHeight - cardPadding;
+  doc.addImage(logoBase64, 'PNG', logoX, logoY, logoWidth, logoHeight);
+
+  y += cardHeight + cardSpacing;
+});
+
+doc.save('feedbacks.pdf'); // chamado depois do forEach
+});
+
+    const form = document.getElementById('formAvaliacao');
+    const lista = document.getElementById('listaFeedbacks');
+    const parametrosContainer = document.getElementById('parametrosContainer');
+    const tipoServicoSelect = document.getElementById('tipoServico');
+
+    const parametrosPorTipo = {
+      Elétrico: ['EPIs', 'Tempo de Execução', 'Limpeza e Organização', 'Qualidade do Serviço'],
+      Mecânico: ['EPIs', 'Tempo de Execução', 'Limpeza e Organização', 'Qualidade do Serviço'],
+      Civil: ['EPIs', 'Tempo de Execução', 'Limpeza e Organização', 'Qualidade do Serviço']
+    };
+
+    tipoServicoSelect.addEventListener('change', () => {
+      const tipo = tipoServicoSelect.value;
+      const parametros = parametrosPorTipo[tipo] || [];
+      parametrosContainer.innerHTML = '<h3>Parâmetros Avaliados</h3>';
+      
+      parametros.forEach((param, index) => {
+        const div = document.createElement('div');
+        div.className = 'checkbox-group';
+
+        div.innerHTML = `
+          <div class="checkbox-label">${param}</div>
+          <div class="checkbox-options">
+            <label>
+              <input type="checkbox" name="parametros[${index}]" value="Conforme - ${param}">
+              Conforme
+            </label>
+            <label>
+              <input type="checkbox" name="parametros[${index}]" value="Não Conforme - ${param}">
+              Não Conforme
+            </label>
+          </div>
+        `;
+        parametrosContainer.appendChild(div);
+      });
+
+      setTimeout(() => {
+        const grupos = parametrosContainer.querySelectorAll('.checkbox-group');
+        grupos.forEach(group => {
+          const checks = group.querySelectorAll('input[type="checkbox"]');
+          checks.forEach(chk => {
+            chk.addEventListener('change', () => {
+              if (chk.checked) {
+                checks.forEach(c => { if (c !== chk) c.checked = false; });
+              }
+            });
+          });
+        });
+      }, 50);
+    });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const dados = Object.fromEntries(new FormData(form).entries());
+
+    const parametrosSelecionados = Array.from(form.querySelectorAll('input[type="checkbox"]:checked'))
+      .map(el => el.value);
+    dados.parametros = parametrosSelecionados;
+
+    const imagemInput = document.getElementById('imagem');
+    const file = imagemInput.files[0];
+
+    if (file) {
+      dados.imagemBase64 = await toBase64(file);
+    }
+
+    await fetch('http://localhost:3000/api/avaliacoes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
+    });
+
+    mostrarAlertaSucesso();
+    form.reset();
+    parametrosContainer.innerHTML = '';
+    carregarFeedbacks();
+  });
+
+  function toBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function carregarFeedbacks(filtros = {}) {
+    const params = new URLSearchParams();
+    for (const key in filtros) {
+      if (filtros[key]) params.append(key, filtros[key]);
+  }
+
+  const url = 'http://localhost:3000/api/avaliacoes' + (params.toString() ? '?' + params.toString() : '');
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    const erro = await res.json();
+    console.error('❌ Resposta inesperada da API:', erro);
+    alert('Erro ao buscar avaliações: ' + (erro?.erro || 'Erro desconhecido'));
+    return;
+  }
+
+  const feedbacks = await res.json();
+
+  if (!Array.isArray(feedbacks)) {
+    console.error('❌ Resposta não é um array:', feedbacks);
+    return;
+  }
+
+  lista.innerHTML = '';
+  feedbacks.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const parametrosTexto = f.parametros?.length ? f.parametros.join(', ') : 'Nenhum parâmetro avaliado';
+
+    card.innerHTML = `
+      <strong>Avaliador:</strong> ${f.cliente}<br>
+      <strong>Ordem de Serviço:</strong> ${f.ordemServico}<br>
+      <strong>Tipo:</strong> ${f.tipoServico}<br>
+      <strong>Nota:</strong> ${f.nota}<br>
+      <strong>Descrição:</strong> ${f.descricao}<br>
+      <strong>Parâmetros:</strong> ${parametrosTexto}<br>
+      <strong>Observações:</strong> ${f.observacoes || 'Nenhuma'}<br>
+      <em>${new Date(f.data).toLocaleString()}</em><br>
+      ${f.imagemBase64 ? `<img src="${f.imagemBase64}" style="max-width:200px; display:block; margin-top:5px;" />` : ''}
+      <button onclick="excluirAvaliacao('${f._id}')">Excluir</button>
+    `;
+
+    if (f.imagemBase64) {
+      card.dataset.imagem = f.imagemBase64;
+    }
+  
+    lista.appendChild(card);
+  });
+}
+
+    async function excluirAvaliacao(id) {
+      if (!confirm('Tem certeza que deseja excluir esta avaliação?')) return;
+      await fetch(`http://localhost:3000/api/avaliacoes/${id}`, {
+      method: 'DELETE'
+    });
+    carregarFeedbacks();
+  }
+
+    const formFiltro = document.getElementById('formFiltro');
+    formFiltro.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const filtros = Object.fromEntries(new FormData(formFiltro).entries());
+      carregarFeedbacks(filtros);
+    });
+
+    document.getElementById('btnLimpar').addEventListener('click', () => {
+      formFiltro.reset();
+      carregarFeedbacks();
+    });
+
+    document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple-effect';
+      
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+
+      btn.appendChild(ripple);
+
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+
+    carregarFeedbacks();
+  </script>
+</body>
+</html>
