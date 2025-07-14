@@ -640,7 +640,7 @@ doc.save('feedbacks.pdf'); // chamado depois do forEach
       dados.imagemBase64 = await toBase64(file);
     }
 
-    await fetch('http://localhost:3000/api/avaliacoes', {
+    await fetch('https://api-feedback-ywsb.onrender.com/api/avaliacoes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dados)
@@ -667,7 +667,7 @@ doc.save('feedbacks.pdf'); // chamado depois do forEach
       if (filtros[key]) params.append(key, filtros[key]);
   }
 
-  const url = 'http://localhost:3000/api/avaliacoes' + (params.toString() ? '?' + params.toString() : '');
+  const url = 'https://api-feedback-ywsb.onrender.com/api/avaliacoes' + (params.toString() ? '?' + params.toString() : '');
   const res = await fetch(url);
 
   if (!res.ok) {
@@ -714,7 +714,7 @@ doc.save('feedbacks.pdf'); // chamado depois do forEach
 
     async function excluirAvaliacao(id) {
       if (!confirm('Tem certeza que deseja excluir esta avaliação?')) return;
-      await fetch(`http://localhost:3000/api/avaliacoes/${id}`, {
+      await fetch(`https://api-feedback-ywsb.onrender.com/api/avaliacoes/${id}`, {
       method: 'DELETE'
     });
     carregarFeedbacks();
