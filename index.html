@@ -699,7 +699,7 @@ doc.save('feedbacks.pdf'); // chamado depois do forEach
       if (filtros[key]) params.append(key, filtros[key]);
   }
 
-  const url = 'hhttps://api-feedback-ywsb.onrender.com/api/avaliacoes' + (params.toString() ? '?' + params.toString() : '');
+  const url = 'https://api-feedback-ywsb.onrender.com/api/avaliacoes' + (params.toString() ? '?' + params.toString() : '');
   const res = await fetch(url);
 
   if (!res.ok) {
